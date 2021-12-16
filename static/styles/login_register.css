@@ -8,7 +8,11 @@
     flex-direction: column;
 }
 
-.login-div, .register-div > * {
+.login-div > * {
+    margin: 10px;
+}
+
+.register-div > * {
     margin: 10px;
 }
 
