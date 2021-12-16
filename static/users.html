@@ -5,8 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Management</title>
+    <link rel="stylesheet" type="text/css" href="styles/users.css">
 </head>
 <body>
-    
+    <h1>Users Management</h1>
+
+    <div class="mgmt-div">
+        <input id="user-name" type="text" placeholder="Username">
+        <input id="user-password" type="text" placeholder="Password">
+        <input id="user-email" type="email" placeholder="E-mail">
+        <span class="privilege-span">
+            <div class="privilege-div">Privilege</div>
+            <select name="Role" id="user-role">
+                <option id="option-user" value="user">User</option>
+                <option id="option-manager" value="manager">Manager</option>
+                <option id="option-admin" value="admin">Admin</option>
+            </select>
+        </span>
+
+        <button id="btn-add-user">Add User</button>
+    </div>
+
+    <!--TODO TABELA SA PRIKAZOM-->
+
+    <script src="script/header.js"></script>
 </body>
 </html>

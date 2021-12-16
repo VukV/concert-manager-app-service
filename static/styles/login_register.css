@@ -16,14 +16,6 @@
     margin: 10px;
 }
 
-input {
-    font-size: 1.1em;
-}
-
-input:focus {
-    outline-color: var(--red);
-}
-
 .register-redirect {
     margin-top: 0px;
     font-size: 0.8em;

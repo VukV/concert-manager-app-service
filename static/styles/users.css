@@ -1,0 +1,12 @@
+@import url(variables.css);
+@import url(general.css);
+
+.privilege-span {
+    display: flex;
+    justify-content: center;
+}
+
+.privilege-div {
+    margin-right: 5px;
+    font-size: 1.1em;
+}

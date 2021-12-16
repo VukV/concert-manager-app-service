@@ -1,3 +1,5 @@
+@import url(variables.css);
+
 body {
     background-color: var(--grey);
     font-family: 'Trebuchet MS', sans-serif;
@@ -65,4 +67,26 @@ button:disabled {
 
 .header-span-shared > * {
     margin: 5px;
+}
+
+input {
+    font-size: 1.1em;
+}
+
+input:focus {
+    outline-color: var(--red);
+}
+
+.mgmt-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mgmt-div > * {
+    margin: 5px;
+}
+
+select {
+    font-size: 1.1em;
 }
