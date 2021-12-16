@@ -1,0 +1,33 @@
+@import url(variables.css);
+@import url(general.css);
+
+.logo-div {
+    margin-top: 50px;
+    margin-bottom: 60px;
+}
+
+.options-div {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.options-list {
+    align-items: center;
+    text-align: center;
+    list-style-type: none;
+    padding: 0;
+    font-size: 1.3em;
+}
+
+.options-li {
+    margin-bottom: 5px;
+    
+}
+
+.options-list li:hover {
+    color: var(--red);
+    cursor: pointer;
+}
+
+

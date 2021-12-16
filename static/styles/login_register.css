@@ -1,0 +1,31 @@
+@import url(variables.css);
+@import url(general.css);
+
+.login-div, .register-div{
+    margin-top: 100px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login-div, .register-div > * {
+    margin: 10px;
+}
+
+input {
+    font-size: 1.1em;
+}
+
+input:focus {
+    outline-color: var(--red);
+}
+
+.register-redirect {
+    margin-top: 0px;
+    font-size: 0.8em;
+}
+
+.register-redirect:hover {
+    cursor: pointer;
+    color: var(--red);
+}
