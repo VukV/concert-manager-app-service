@@ -4,7 +4,7 @@ function init(){
     setHeader();
 
     document.getElementById("btn-home-shared").addEventListener('click', returnHome);
-    //TODO buttons
+    //TODO logout buttons
 }
 
 function setHeader(){
