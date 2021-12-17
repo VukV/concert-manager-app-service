@@ -3,6 +3,7 @@ window.addEventListener('load', init);
 function init(){
     setHeader();
 
+    document.getElementById("btn-home-shared").addEventListener('click', returnHome);
     //TODO buttons
 }
 
@@ -19,4 +20,8 @@ function setHeader(){
         <button id="btn-logout-shared">Log Out</button>
     </span>`;
     document.getElementById("bhs").innerHTML = headerElement;
+}
+
+function returnHome(){
+    window.location.href = 'index.html';
 }

@@ -1,0 +1,22 @@
+{
+  "name": "concert-manager-app-service",
+  "version": "1.0.0",
+  "description": "This is a part of NodeJS microservice project.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VukV/concert-manager-app-service.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VukV/concert-manager-app-service/issues"
+  },
+  "homepage": "https://github.com/VukV/concert-manager-app-service#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
