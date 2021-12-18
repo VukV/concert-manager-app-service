@@ -1,5 +1,45 @@
 window.addEventListener('load', init);
 
 function init(){
-    //TODO
+    //TODO cookies, token
+
+    getUsers();
+
+    document.getElementById("btn-add-user").addEventListener('click', e => {
+        e.preventDefault();
+
+        var data = {
+            username: document.getElementById('user-name').value,
+            password: document.getElementById('user-password').value,
+            email: document.getElementById('user-email').value,
+            privilege: document.getElementById('user-role').value
+        }
+
+        fetch('http://localhost:8081/admin/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+                //TODO 'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(resElement => {
+                if(resElement.NESTO){
+                    //todo error
+                }
+                else{
+                    //todo dodaj bend u listu
+                }
+            });
+    });
+}
+
+function getUsers(){
+    fetch('http://localhost:8081/admin/users', {
+        headers: {
+            //TODO 'Authorization': 'Bearer ' + token
+        }
+    })
+    //response -> list item on page (html)
 }
