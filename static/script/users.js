@@ -24,13 +24,9 @@ function init(){
             body: JSON.stringify(data)
         })
             .then(res => res.json())
-            .then(resElement => {
-                if(resElement.NESTO){
-                    //todo error
-                }
-                else{
-                    //todo dodaj bend u listu
-                }
+            .then(resElement => {    
+                //todo if, else, todo dodaj korisnika u listu
+                console.log(resElement);
             });
     });
 }

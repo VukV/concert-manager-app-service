@@ -5,7 +5,7 @@ function init(){
 
     getReservations();
 
-    document.getElementById("btn-add-user").addEventListener('click', e => {
+    document.getElementById("btn-add-reservation").addEventListener('click', e => {
         e.preventDefault();
 
         var data = {
@@ -23,13 +23,9 @@ function init(){
             body: JSON.stringify(data)
         })
             .then(res => res.json())
-            .then(resElement => {
-                if(resElement.NESTO){
-                    //todo error
-                }
-                else{
-                    //todo dodaj bend u listu
-                }
+            .then(resElement => {    
+                //todo if, else, todo dodaj rezervaciju u listu
+                console.log(resElement);
             });
     });
 }
