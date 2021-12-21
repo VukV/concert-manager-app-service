@@ -1,2 +1,6 @@
 @import url(variables.css);
 @import url(general.css);
+
+#bands-list-div {
+    margin-top: 20px;
+}
