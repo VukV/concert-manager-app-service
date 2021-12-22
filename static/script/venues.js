@@ -25,10 +25,26 @@ function init(){
             body: JSON.stringify(data)
         })
             .then(res => res.json())
-            .then(resElement => {    
-                //todo if, else, todo dodaj mesto u listu
-                console.log(resElement);
-            });
+                .then(resElement => {    
+                    if(resElement.message){
+                        alert(resElement.message);
+                    }
+                    else{
+                        let newRow = 
+                        `<tr>
+                            <td>${resElement.id}</td>
+                            <td>${resElement.name}</td>
+                            <td>${resElement.capacity}</td>
+                            <td>${resElement.address}</td>
+                            <td>${resElement.website}</td>
+                            <td> <button id="btn-edit-${resElement.id}" class="btn-edit"> Edit </button> </td>
+                            <td> <button id="btn-del-${resElement.id}" class="btn-del"> Delete </button> </td>
+                        </tr>`;
+
+                    document.querySelector('#venues-body').innerHTML = document.querySelector('#venues-body').innerHTML + newRow;
+                    clearInput();
+                    }
+                });
     });
 }
 
@@ -38,5 +54,28 @@ function getVenues(){
             //TODO 'Authorization': 'Bearer ' + token
         }
     })
-    //response -> list item on page (html)
+    .then(res => res.json())
+        .then(data => {
+            data.forEach(element => {
+                let newRow = 
+                    `<tr>
+                        <td>${element.id}</td>
+                        <td>${element.name}</td>
+                        <td>${element.capacity}</td>
+                        <td>${element.address}</td>
+                        <td>${element.website}</td>
+                        <td> <button id="btn-edit-${element.id}" class="btn-edit"> Edit </button> </td>
+                        <td> <button id="btn-del-${element.id}" class="btn-del"> Delete </button> </td>
+                    </tr>`;
+
+                document.querySelector('#venues-body').innerHTML = document.querySelector('#venues-body').innerHTML + newRow;
+            });
+        });
+}
+
+function clearInput(){
+    document.getElementById('venue-name').value = '';
+    document.getElementById('venue-capacity').value = '';
+    document.getElementById('venue-address').value = '';
+    document.getElementById('venue-website').value = '';
 }

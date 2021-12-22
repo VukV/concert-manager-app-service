@@ -18,7 +18,20 @@
         <button id="btn-add-reservation">Add Reservation</button>
     </div>
 
-    <!--TODO TABELA SA PRIKAZOM-->
+    <div id="reservations-list-div">
+        <h3>Reservations:</h3>
+        <table>
+            <thead>
+                <th>id</th>
+                <th>userId</th>
+                <th>concertId</th>
+                <th>Tickets Count</th>
+                <th>Total Price</th>
+                <th>Valid Until</th>
+            </thead>
+            <tbody id="reservations-body"></tbody>
+        </table>
+    </div>
   
     <script src="script/header.js"></script>
     <script src="script/reservations.js"></script>

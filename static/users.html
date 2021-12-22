@@ -19,13 +19,26 @@
             <select name="Role" id="user-role">
                 <option id="option-manager" value="MANAGER">Manager</option>
                 <option id="option-admin" value="ADMIN">Admin</option>
+                <option id="option-user" value="USER">User</option>
             </select>
         </span>
 
         <button id="btn-add-user">Add User</button>
     </div>
 
-    <!--TODO TABELA SA PRIKAZOM-->
+    <div id="users-list-div">
+        <h3>Users:</h3>
+        <table>
+            <thead>
+                <th>id</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Email</th>
+                <th>Privilege</th>
+            </thead>
+            <tbody id="users-body"></tbody>
+        </table>
+    </div>
 
     <script src="script/header.js"></script>
     <script src="script/users.js"></script>

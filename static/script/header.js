@@ -23,5 +23,10 @@ function setHeader(){
 }
 
 function returnHome(){
-    window.location.href = 'index.html';
+    window.location.href = '/';
+}
+
+function logOut(){
+    //todo cookies = 0
+    returnHome();
 }

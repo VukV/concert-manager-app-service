@@ -19,9 +19,9 @@
 .register-redirect {
     margin-top: 0px;
     font-size: 0.8em;
+    color: var(--red);
 }
 
 .register-redirect:hover {
-    cursor: pointer;
     color: var(--red);
 }

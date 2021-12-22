@@ -1,3 +1,6 @@
 @import url(variables.css);
 @import url(general.css);
 
+#concerts-list-div {
+    margin-top: 20px;
+}

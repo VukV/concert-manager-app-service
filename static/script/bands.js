@@ -25,25 +25,26 @@ function init(){
             body: JSON.stringify(data)
         })
             .then(res => res.json())
-            .then(resElement => {    
-                if(resElement.message){
-                    alert(resElement.message);
-                }
-                else{
-                    let newRow = 
-                    `<tr>
-                        <td>${resElement.id}</td>
-                        <td>${resElement.name}</td>
-                        <td>${resElement.genre}</td>
-                        <td>${resElement.country}</td>
-                        <td>${resElement.year}</td>
-                        <td> <button id="btn-edit-${resElement.id}" class="btn-edit"> Edit </button> </td>
-                        <td> <button id="btn-del-${resElement.id}" class="btn-del"> Delete </button> </td>
-                    </tr>`;
+                .then(resElement => {    
+                    if(resElement.message){
+                        alert(resElement.message);
+                    }
+                    else{
+                        let newRow = 
+                        `<tr>
+                            <td>${resElement.id}</td>
+                            <td>${resElement.name}</td>
+                            <td>${resElement.genre}</td>
+                            <td>${resElement.country}</td>
+                            <td>${resElement.year}</td>
+                            <td> <button id="btn-edit-${resElement.id}" class="btn-edit"> Edit </button> </td>
+                            <td> <button id="btn-del-${resElement.id}" class="btn-del"> Delete </button> </td>
+                        </tr>`;
 
-                document.querySelector('#bands-body').innerHTML = document.querySelector('#bands-body').innerHTML + newRow;
-                }
-            });
+                    document.querySelector('#bands-body').innerHTML = document.querySelector('#bands-body').innerHTML + newRow;
+                    clearInput();
+                    }
+                });
     });
 }
 
@@ -53,7 +54,7 @@ function getBands(){
             //TODO 'Authorization': 'Bearer ' + token
         }
     })
-        .then(res => res.json())
+    .then(res => res.json())
         .then(data => {
             data.forEach(element => {
                 let newRow = 
@@ -70,4 +71,11 @@ function getBands(){
                 document.querySelector('#bands-body').innerHTML = document.querySelector('#bands-body').innerHTML + newRow;
             });
         });
+}
+
+function clearInput(){
+    document.getElementById('band-name').value = '';
+    document.getElementById('band-country').value = '';
+    document.getElementById('band-year').value = '';
+    document.getElementById('band-genre').value = '';
 }

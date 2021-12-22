@@ -17,17 +17,21 @@
     text-align: center;
     list-style-type: none;
     padding: 0;
-    font-size: 1.3em;
+    
 }
 
 .options-li {
     margin-bottom: 5px;
-    
 }
 
-.options-list li:hover {
+.admin-page-a {
+    font-size: 1.3em;
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+.admin-page-a:hover {
     color: var(--red);
-    cursor: pointer;
 }
 
 

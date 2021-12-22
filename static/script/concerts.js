@@ -24,10 +24,28 @@ function init(){
             },
             body: JSON.stringify(data)
         })
-            .then(res => res.json())
+        .then(res => res.json())
             .then(resElement => {    
-                //todo if, else, todo dodaj koncert u listu
-                console.log(resElement);
+                if(resElement.message){
+                    alert(resElement.message);
+                }
+                else{
+                    let newRow = 
+                    `<tr>
+                        <td>${resElement.id}</td>
+                        <td>${resElement.bandId}</td>
+                        <td>${resElement.venueId}</td>
+                        <td>${resElement.date}</td>
+                        <td>${resElement.time}</td>
+                        <td>${resElement.ticketsNumber}</td>
+                        <td>${resElement.ticketPrice}</td>
+                        <td> <button id="btn-edit-${resElement.id}" class="btn-edit"> Edit </button> </td>
+                        <td> <button id="btn-del-${resElement.id}" class="btn-del"> Delete </button> </td>
+                    </tr>`;
+
+                document.querySelector('#concerts-body').innerHTML = document.querySelector('#concerts-body').innerHTML + newRow;
+                clearInput();
+                }
             });
     });
 }
@@ -38,5 +56,31 @@ function getConcerts(){
             //TODO 'Authorization': 'Bearer ' + token
         }
     })
-    //response -> list item on page (html)
+    .then(res => res.json())
+        .then(data => {
+            data.forEach(element => {
+                let newRow = 
+                    `<tr>
+                        <td>${element.id}</td>
+                        <td>${element.bandId}</td>
+                        <td>${element.venueId}</td>
+                        <td>${element.date}</td>
+                        <td>${element.time}</td>
+                        <td>${element.ticketsNumber}</td>
+                        <td>${element.ticketPrice}</td>
+                        <td> <button id="btn-edit-${element.id}" class="btn-edit"> Edit </button> </td>
+                        <td> <button id="btn-del-${element.id}" class="btn-del"> Delete </button> </td>
+                    </tr>`;
+
+                document.querySelector('#concerts-body').innerHTML = document.querySelector('#concerts-body').innerHTML + newRow;
+            });
+        });
+}
+
+function clearInput(){
+    document.getElementById('band-id').value = '';
+    document.getElementById('venue-id').value = '';
+    document.getElementById('concert-ticket-price').value = '';
+    document.getElementById('concert-date').value = '';
+    document.getElementById('concert-time').value = '';
 }

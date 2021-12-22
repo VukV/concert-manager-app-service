@@ -3,7 +3,7 @@ const path = require('path');
 
 const app = express();
 
-//todo authToken?
+//todo authToken
 
 app.get('/login', (req, res) =>{
     res.sendFile('login.html', {root: './static'});

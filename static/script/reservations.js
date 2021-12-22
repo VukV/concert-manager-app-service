@@ -23,10 +23,27 @@ function init(){
             body: JSON.stringify(data)
         })
             .then(res => res.json())
-            .then(resElement => {    
-                //todo if, else, todo dodaj rezervaciju u listu
-                console.log(resElement);
-            });
+                .then(resElement => {    
+                    if(resElement.message){
+                        alert(resElement.message);
+                    }
+                    else{
+                        let newRow = 
+                        `<tr>
+                            <td>${resElement.id}</td>
+                            <td>${resElement.userId}</td>
+                            <td>${resElement.concertId}</td>
+                            <td>${resElement.ticketsNumber}</td>
+                            <td>${resElement.totalPrice}</td>
+                            <td>${resElement.validUntil}</td>
+                            <td> <button id="btn-edit-${resElement.id}" class="btn-edit"> Edit </button> </td>
+                            <td> <button id="btn-del-${resElement.id}" class="btn-del"> Delete </button> </td>
+                        </tr>`;
+
+                    document.querySelector('#reservations-body').innerHTML = document.querySelector('#reservations-body').innerHTML + newRow;
+                    clearInput();
+                    }
+                });
     });
 }
 
@@ -36,5 +53,28 @@ function getReservations(){
             //TODO 'Authorization': 'Bearer ' + token
         }
     })
-    //response -> list item on page (html)
+    .then(res => res.json())
+        .then(data => {
+            data.forEach(element => {
+                let newRow = 
+                    `<tr>
+                        <td>${element.id}</td>
+                        <td>${element.userId}</td>
+                        <td>${element.concertId}</td>
+                        <td>${element.ticketsNumber}</td>
+                        <td>${element.totalPrice}</td>
+                        <td>${element.validUntil}</td>
+                        <td> <button id="btn-edit-${element.id}" class="btn-edit"> Edit </button> </td>
+                        <td> <button id="btn-del-${element.id}" class="btn-del"> Delete </button> </td>
+                    </tr>`;
+
+                document.querySelector('#reservations-body').innerHTML = document.querySelector('#reservations-body').innerHTML + newRow;
+            });
+        });
+}
+
+function clearInput(){
+    document.getElementById('user-id').value = '';
+    document.getElementById('concert-id').value = '';
+    document.getElementById('tickets-count').value = '';
 }
