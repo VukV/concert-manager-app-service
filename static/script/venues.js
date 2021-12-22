@@ -38,7 +38,7 @@ function init(){
                             <td>${resElement.address}</td>
                             <td>${resElement.website}</td>
                             <td class="tdeb"> <button id="btn-edit-${resElement.id}" class="btn-edit"> Edit </button> </td>
-                            <td> <button id="btn-del-${resElement.id}" class="btn-del"> Delete </button> </td>
+                            <td> <button id="btn-del-${resElement.id}" class="btn-del" onclick="deleteVenue(${resElement.id})"> Delete </button> </td>
                         </tr>`;
 
                         document.querySelector('#venues-body').innerHTML = document.querySelector('#venues-body').innerHTML + newRow;
@@ -65,7 +65,7 @@ function getVenues(){
                         <td>${element.address}</td>
                         <td>${element.website}</td>
                         <td class="tdeb"> <button id="btn-edit-${element.id}" class="btn-edit"> Edit </button> </td>
-                        <td> <button id="btn-del-${element.id}" class="btn-del"> Delete </button> </td>
+                        <td> <button id="btn-del-${element.id}" class="btn-del" onclick="deleteVenue(${element.id})"> Delete </button> </td>
                     </tr>`;
 
                 document.querySelector('#venues-body').innerHTML = document.querySelector('#venues-body').innerHTML + newRow;
@@ -78,4 +78,28 @@ function clearInput(){
     document.getElementById('venue-capacity').value = '';
     document.getElementById('venue-address').value = '';
     document.getElementById('venue-website').value = '';
+}
+
+function deleteVenue(venueId){
+    var data = {
+        id: venueId
+    }
+
+    fetch('http://localhost:8081/admin/venues', {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+            //TODO 'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify(data)
+    })
+    .then(res => {
+        if(res.json().message){
+            alert(res.json().message);
+        }
+        else{
+            let trDelete = document.getElementById(`btn-del-${venueId}`).parentNode.parentNode;
+            trDelete.parentNode.removeChild(trDelete); 
+        }
+    });
 }

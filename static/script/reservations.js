@@ -37,7 +37,7 @@ function init(){
                             <td>${resElement.totalPrice}</td>
                             <td>${resElement.validUntil}</td>
                             <td class="tdeb"> <button id="btn-edit-${resElement.id}" class="btn-edit"> Edit </button> </td>
-                            <td> <button id="btn-del-${resElement.id}" class="btn-del"> Delete </button> </td>
+                            <td> <button id="btn-del-${resElement.id}" class="btn-del" onclick="deleteReservation(${resElement.id})"> Delete </button> </td>
                         </tr>`;
 
                         document.querySelector('#reservations-body').innerHTML = document.querySelector('#reservations-body').innerHTML + newRow;
@@ -65,7 +65,7 @@ function getReservations(){
                         <td>${element.totalPrice}</td>
                         <td>${element.validUntil}</td>
                         <td class="tdeb"> <button id="btn-edit-${element.id}" class="btn-edit"> Edit </button> </td>
-                        <td> <button id="btn-del-${element.id}" class="btn-del"> Delete </button> </td>
+                        <td> <button id="btn-del-${element.id}" class="btn-del" onclick="deleteReservation(${element.id})"> Delete </button> </td>
                     </tr>`;
 
                 document.querySelector('#reservations-body').innerHTML = document.querySelector('#reservations-body').innerHTML + newRow;
@@ -77,4 +77,28 @@ function clearInput(){
     document.getElementById('user-id').value = '';
     document.getElementById('concert-id').value = '';
     document.getElementById('tickets-count').value = '';
+}
+
+function deleteReservation(reservationId){
+    var data = {
+        id: reservationId
+    }
+
+    fetch('http://localhost:8081/admin/reservations', {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+            //TODO 'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify(data)
+    })
+    .then(res => {
+        if(res.json().message){
+            alert(res.json().message);
+        }
+        else{
+            let trDelete = document.getElementById(`btn-del-${reservationId}`).parentNode.parentNode;
+            trDelete.parentNode.removeChild(trDelete); 
+        }
+    });
 }

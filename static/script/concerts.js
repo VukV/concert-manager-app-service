@@ -40,7 +40,7 @@ function init(){
                         <td>${resElement.ticketsNumber}</td>
                         <td>${resElement.ticketPrice}</td>
                         <td class="tdeb"> <button id="btn-edit-${resElement.id}" class="btn-edit"> Edit </button> </td>
-                        <td> <button id="btn-del-${resElement.id}" class="btn-del"> Delete </button> </td>
+                        <td> <button id="btn-del-${resElement.id}" class="btn-del" onclick="deleteConcert(${resElement.id})"> Delete </button> </td>
                     </tr>`;
 
                     document.querySelector('#concerts-body').innerHTML = document.querySelector('#concerts-body').innerHTML + newRow;
@@ -69,7 +69,7 @@ function getConcerts(){
                         <td>${element.ticketsNumber}</td>
                         <td>${element.ticketPrice}</td>
                         <td class="tdeb"> <button id="btn-edit-${element.id}" class="btn-edit"> Edit </button> </td>
-                        <td> <button id="btn-del-${element.id}" class="btn-del"> Delete </button> </td>
+                        <td> <button id="btn-del-${element.id}" class="btn-del" onclick="deleteConcert(${element.id})"> Delete </button> </td>
                     </tr>`;
 
                 document.querySelector('#concerts-body').innerHTML = document.querySelector('#concerts-body').innerHTML + newRow;
@@ -83,4 +83,28 @@ function clearInput(){
     document.getElementById('concert-ticket-price').value = '';
     document.getElementById('concert-date').value = '';
     document.getElementById('concert-time').value = '';
+}
+
+function deleteConcert(concertId){
+    var data = {
+        id: concertId
+    }
+
+    fetch('http://localhost:8081/admin/concerts', {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+            //TODO 'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify(data)
+    })
+    .then(res => {
+        if(res.json().message){
+            alert(res.json().message);
+        }
+        else{
+            let trDelete = document.getElementById(`btn-del-${concertId}`).parentNode.parentNode;
+            trDelete.parentNode.removeChild(trDelete); 
+        }
+    });
 }
