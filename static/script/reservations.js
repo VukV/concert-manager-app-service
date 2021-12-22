@@ -36,12 +36,12 @@ function init(){
                             <td>${resElement.ticketsNumber}</td>
                             <td>${resElement.totalPrice}</td>
                             <td>${resElement.validUntil}</td>
-                            <td> <button id="btn-edit-${resElement.id}" class="btn-edit"> Edit </button> </td>
+                            <td class="tdeb"> <button id="btn-edit-${resElement.id}" class="btn-edit"> Edit </button> </td>
                             <td> <button id="btn-del-${resElement.id}" class="btn-del"> Delete </button> </td>
                         </tr>`;
 
-                    document.querySelector('#reservations-body').innerHTML = document.querySelector('#reservations-body').innerHTML + newRow;
-                    clearInput();
+                        document.querySelector('#reservations-body').innerHTML = document.querySelector('#reservations-body').innerHTML + newRow;
+                        clearInput();
                     }
                 });
     });
@@ -64,7 +64,7 @@ function getReservations(){
                         <td>${element.ticketsNumber}</td>
                         <td>${element.totalPrice}</td>
                         <td>${element.validUntil}</td>
-                        <td> <button id="btn-edit-${element.id}" class="btn-edit"> Edit </button> </td>
+                        <td class="tdeb"> <button id="btn-edit-${element.id}" class="btn-edit"> Edit </button> </td>
                         <td> <button id="btn-del-${element.id}" class="btn-del"> Delete </button> </td>
                     </tr>`;
 

@@ -36,12 +36,12 @@ function init(){
                             <td>${resElement.password}</td>
                             <td>${resElement.email}</td>
                             <td>${resElement.privilege}</td>
-                            <td> <button id="btn-edit-${resElement.id}" class="btn-edit"> Edit </button> </td>
+                            <td class="tdeb"> <button id="btn-edit-${resElement.id}" class="btn-edit"> Edit </button> </td>
                             <td> <button id="btn-del-${resElement.id}" class="btn-del"> Delete </button> </td>
                         </tr>`;
 
-                    document.querySelector('#users-body').innerHTML = document.querySelector('#users-body').innerHTML + newRow;
-                    clearInput();
+                        document.querySelector('#users-body').innerHTML = document.querySelector('#users-body').innerHTML + newRow;
+                        clearInput();
                     }
                 });
     });
@@ -63,7 +63,7 @@ function getUsers(){
                         <td>${element.password}</td>
                         <td>${element.email}</td>
                         <td>${element.privilege}</td>
-                        <td> <button id="btn-edit-${element.id}" class="btn-edit"> Edit </button> </td>
+                        <td class="tdeb"> <button id="btn-edit-${element.id}" class="btn-edit"> Edit </button> </td>
                         <td> <button id="btn-del-${element.id}" class="btn-del"> Delete </button> </td>
                     </tr>`;
 

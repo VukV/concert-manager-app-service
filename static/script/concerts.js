@@ -39,12 +39,12 @@ function init(){
                         <td>${resElement.time}</td>
                         <td>${resElement.ticketsNumber}</td>
                         <td>${resElement.ticketPrice}</td>
-                        <td> <button id="btn-edit-${resElement.id}" class="btn-edit"> Edit </button> </td>
+                        <td class="tdeb"> <button id="btn-edit-${resElement.id}" class="btn-edit"> Edit </button> </td>
                         <td> <button id="btn-del-${resElement.id}" class="btn-del"> Delete </button> </td>
                     </tr>`;
 
-                document.querySelector('#concerts-body').innerHTML = document.querySelector('#concerts-body').innerHTML + newRow;
-                clearInput();
+                    document.querySelector('#concerts-body').innerHTML = document.querySelector('#concerts-body').innerHTML + newRow;
+                    clearInput();
                 }
             });
     });
@@ -68,7 +68,7 @@ function getConcerts(){
                         <td>${element.time}</td>
                         <td>${element.ticketsNumber}</td>
                         <td>${element.ticketPrice}</td>
-                        <td> <button id="btn-edit-${element.id}" class="btn-edit"> Edit </button> </td>
+                        <td class="tdeb"> <button id="btn-edit-${element.id}" class="btn-edit"> Edit </button> </td>
                         <td> <button id="btn-del-${element.id}" class="btn-del"> Delete </button> </td>
                     </tr>`;
 
