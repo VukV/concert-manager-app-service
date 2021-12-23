@@ -1,4 +1,5 @@
 window.addEventListener('load', init);
+let currentId;
 
 function init(){
     //TODO cookies, token
