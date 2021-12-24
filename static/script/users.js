@@ -38,7 +38,6 @@ function addUser(){
                     `<tr>
                         <td>${resElement.id}</td>
                         <td>${resElement.username}</td>
-                        <td>${resElement.password}</td>
                         <td>${resElement.email}</td>
                         <td>${resElement.privilege}</td>
                         <td class="tdeb"> <button id="btn-edit-${resElement.id}" class="btn-edit" onclick="openPopUp(${resElement.id})"> Edit </button> </td>
@@ -64,7 +63,6 @@ function getUsers(){
                     `<tr>
                         <td>${element.id}</td>
                         <td>${element.username}</td>
-                        <td>${element.password}</td>
                         <td>${element.email}</td>
                         <td>${element.privilege}</td>
                         <td class="tdeb"> <button id="btn-edit-${element.id}" class="btn-edit" onclick="openPopUp(${element.id})"> Edit </button> </td>

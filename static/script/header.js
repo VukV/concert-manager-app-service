@@ -4,7 +4,7 @@ function init(){
     setHeader();
 
     document.getElementById("btn-home-shared").addEventListener('click', returnHome);
-    //TODO logout buttons
+    document.getElementById("btn-logout-shared").addEventListener('click', logOut);
 }
 
 function setHeader(){
@@ -27,6 +27,6 @@ function returnHome(){
 }
 
 function logOut(){
-    //todo cookies = 0
-    returnHome();
+    document.cookie = `token=;SameSite=Lax`;
+    window.location.href = '/login';
 }

@@ -1,9 +1,13 @@
 const express = require('express');
 const path = require('path');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 const app = express();
 
-//todo authToken
+app.get('/', (req, res) =>{
+    res.sendFile('index.html', {root: './static'});
+});
 
 app.get('/login', (req, res) =>{
     res.sendFile('login.html', {root: './static'});
@@ -11,11 +15,6 @@ app.get('/login', (req, res) =>{
 
 app.get('/register', (req, res) =>{
     res.sendFile('register.html', {root: './static'});
-});
-
-//TODO: auth za sve naredne metode
-app.get('/', (req, res) =>{
-    res.sendFile('index.html', {root: './static'});
 });
 
 app.get('/bands', (req, res) =>{
