@@ -18,7 +18,7 @@ function init(){
             .then(res => res.json())
                 .then(resElement => {
                     document.cookie = `token=${resElement.token};SameSite=Lax`;
-                    window.location.href = '/';
+                    window.location.href = 'registration_success.html';
                 });
     });
 }

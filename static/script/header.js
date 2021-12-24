@@ -23,7 +23,7 @@ function setHeader(){
 }
 
 function returnHome(){
-    window.location.href = '/';
+    window.location.href = 'index.html';
 }
 
 function logOut(){

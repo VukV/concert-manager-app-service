@@ -21,8 +21,9 @@ function init(){
                         alert(resElement.message);
                     } 
                     else{
+                        console.log('redirect na home');
                         document.cookie = `token=${resElement.token};SameSite=Lax`;
-                        window.location.href = '/';
+                        window.location.href = 'index.html';
                     }
                 });
     });
