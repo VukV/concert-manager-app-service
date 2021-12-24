@@ -40,6 +40,28 @@
         </table>
     </div>
 
+    <div id="popup">
+        <div id="popup-update">
+            <h3>Update User:</h3>
+            <input id="name-popup" type="text" placeholder="Username">
+            <input id="password-popup" type="text" placeholder="Password">
+            <input id="email-popup" type="text" placeholder="Email">
+            <span class="privilege-span">
+                <div class="privilege-div">Privilege</div>
+                <select name="Role" id="role-popup">
+                    <option id="manager-popup" value="MANAGER">Manager</option>
+                    <option id="admin-popup" value="ADMIN">Admin</option>
+                    <option id="user-popup" value="USER">User</option>
+                </select>
+            </span>
+
+            <span>
+                <button id="btn-update-user">Update</button>
+                <button id="btn-cancel">Canel</button>
+            </span>
+        </div>
+    </div>
+
     <script src="script/header.js"></script>
     <script src="script/users.js"></script>
 </body>

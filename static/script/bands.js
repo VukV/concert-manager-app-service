@@ -13,7 +13,7 @@ function init(){
     document.getElementById("btn-cancel").addEventListener('click', closePopUp);
 }
 
-function addBand(data){
+function addBand(){
     var data = {
         name: document.getElementById('band-name').value,
         country: document.getElementById('band-country').value,

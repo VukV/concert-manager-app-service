@@ -6,49 +6,52 @@ function init(){
 
     getConcerts();
 
-    document.getElementById("btn-add-concert").addEventListener('click', e => {
-        e.preventDefault();
+    document.getElementById("btn-add-concert").addEventListener('click', addConcert);
 
-        var data = {
-            bandId: document.getElementById('band-id').value,
-            venueId: document.getElementById('venue-id').value,
-            ticketPrice: document.getElementById('concert-ticket-price').value,
-            date: document.getElementById('concert-date').value,
-            time: document.getElementById('concert-time').value
-        }
+    document.getElementById("btn-update-concert").addEventListener('click', updateConcert);
+    document.getElementById("btn-cancel").addEventListener('click', closePopUp);
+}
 
-        fetch('http://localhost:8081/admin/concerts', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-                //TODO 'Authorization': 'Bearer ' + token
-            },
-            body: JSON.stringify(data)
-        })
-        .then(res => res.json())
-            .then(resElement => {    
-                if(resElement.message){
-                    alert(resElement.message);
-                }
-                else{
-                    let newRow = 
-                    `<tr>
-                        <td>${resElement.id}</td>
-                        <td>${resElement.bandId}</td>
-                        <td>${resElement.venueId}</td>
-                        <td>${resElement.date}</td>
-                        <td>${resElement.time}</td>
-                        <td>${resElement.ticketsNumber}</td>
-                        <td>${resElement.ticketPrice}</td>
-                        <td class="tdeb"> <button id="btn-edit-${resElement.id}" class="btn-edit"> Edit </button> </td>
-                        <td> <button id="btn-del-${resElement.id}" class="btn-del" onclick="deleteConcert(${resElement.id})"> Delete </button> </td>
-                    </tr>`;
+function addConcert(){
+    var data = {
+        bandId: document.getElementById('band-id').value,
+        venueId: document.getElementById('venue-id').value,
+        ticketPrice: document.getElementById('concert-ticket-price').value,
+        date: document.getElementById('concert-date').value,
+        time: document.getElementById('concert-time').value
+    }
 
-                    document.querySelector('#concerts-body').innerHTML = document.querySelector('#concerts-body').innerHTML + newRow;
-                    clearInput();
-                }
-            });
-    });
+    fetch('http://localhost:8081/admin/concerts', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+            //TODO 'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+        .then(resElement => {    
+            if(resElement.message){
+                alert(resElement.message);
+            }
+            else{
+                let newRow = 
+                `<tr>
+                    <td>${resElement.id}</td>
+                    <td>${resElement.bandId}</td>
+                    <td>${resElement.venueId}</td>
+                    <td>${resElement.date}</td>
+                    <td>${resElement.time}</td>
+                    <td>${resElement.ticketsNumber}</td>
+                    <td>${resElement.ticketPrice}</td>
+                    <td class="tdeb"> <button id="btn-edit-${resElement.id}" class="btn-edit" onclick="openPopUp(${resElement.id})"> Edit </button> </td>
+                    <td> <button id="btn-del-${resElement.id}" class="btn-del" onclick="deleteConcert(${resElement.id})"> Delete </button> </td>
+                </tr>`;
+
+                document.querySelector('#concerts-body').innerHTML = document.querySelector('#concerts-body').innerHTML + newRow;
+                clearInput();
+            }
+        });
 }
 
 function getConcerts(){
@@ -69,7 +72,7 @@ function getConcerts(){
                         <td>${element.time}</td>
                         <td>${element.ticketsNumber}</td>
                         <td>${element.ticketPrice}</td>
-                        <td class="tdeb"> <button id="btn-edit-${element.id}" class="btn-edit"> Edit </button> </td>
+                        <td class="tdeb"> <button id="btn-edit-${element.id}" class="btn-edit" onclick="openPopUp(${element.id})"> Edit </button> </td>
                         <td> <button id="btn-del-${element.id}" class="btn-del" onclick="deleteConcert(${element.id})"> Delete </button> </td>
                     </tr>`;
 
@@ -108,4 +111,56 @@ function deleteConcert(concertId){
             trDelete.parentNode.removeChild(trDelete); 
         }
     });
+}
+
+function openPopUp(concertId){
+    currentId = concertId;
+    document.getElementById('popup').style.visibility = 'visible';
+}
+
+function closePopUp(){
+    document.getElementById('popup').style.visibility = 'hidden';
+}
+
+function updateConcert(){
+    var data = {
+        id: currentId,
+        bandId: document.getElementById('band-popup').value,
+        venueId: document.getElementById('venue-popup').value,
+        ticketPrice: document.getElementById('price-popup').value,
+        ticketsNumber: document.getElementById('tickets-popup').value,
+        date: document.getElementById('date-popup').value,
+        time: document.getElementById('time-popup').value
+    }
+    currentId = null;
+
+    fetch('http://localhost:8081/admin/concerts', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+            //TODO 'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify(data)
+    })
+    .then(res => {
+        if(res.json().message){
+            alert(res.json().message);
+        }
+        else{
+            document.querySelector('#concerts-body').innerHTML = '';
+            getConcerts();
+
+            closePopUp();
+            clearUpdate();
+        }
+    });
+}
+
+function clearUpdate(){
+    document.getElementById('band-popup').value = '';
+    document.getElementById('venue-popup').value = '';
+    document.getElementById('price-popup').value = '';
+    document.getElementById('tickets-popup').value = '';
+    document.getElementById('date-popup').value = '';
+    document.getElementById('time-popup').value = '';
 }

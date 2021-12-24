@@ -4,3 +4,28 @@
 #concerts-list-div {
     margin-top: 20px;
 }
+
+#popup {
+    visibility: hidden;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: var(--grey);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#popup-update {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#popup-update > * {
+    margin: 5px;
+}
