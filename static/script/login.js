@@ -21,10 +21,8 @@ function init(){
                         alert(resElement.message);
                     } 
                     else{
-                        console.log('EEEEEE');
                         document.cookie = `token=${resElement.token};SameSite=Lax`;
-                        //window.location.href = '/';
-                        console.log('AAAAA');
+                        window.location.href = '/';
                     }
                 });
     });

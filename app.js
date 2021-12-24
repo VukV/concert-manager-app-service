@@ -37,5 +37,9 @@ app.get('/users', (req, res) =>{
     res.sendFile('users.html', {root: './static'});
 });
 
+app.get('/registration-success', (req, res) =>{
+    res.sendFile('registration_success.html', {root: './static'});
+});
+
 app.use(express.static(path.join(__dirname, 'static')));
 app.listen(8080);

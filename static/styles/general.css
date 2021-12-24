@@ -121,3 +121,10 @@ h3 {
 .btn-edit:hover {
     background-color: var(--light-grey-darker);
 }
+
+.reg-success-div {
+    margin-top: 100px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
