@@ -1,8 +1,10 @@
 window.addEventListener('load', init);
+
+const cookies = document.cookie.split('=');
+const token = cookies[cookies.length - 1];
 let currentId;
 
 function init(){
-    //TODO cookies, tokens
 
     getConcerts();
 
@@ -24,8 +26,8 @@ function addConcert(){
     fetch('http://localhost:8081/admin/concerts', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
-            //TODO 'Authorization': 'Bearer ' + token
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify(data)
     })
@@ -57,7 +59,7 @@ function addConcert(){
 function getConcerts(){
     fetch('http://localhost:8081/admin/concerts', {
         headers: {
-            //TODO 'Authorization': 'Bearer ' + token
+            'Authorization': 'Bearer ' + token
         }
     })
     .then(res => res.json())
@@ -97,8 +99,8 @@ function deleteConcert(concertId){
     fetch('http://localhost:8081/admin/concerts', {
         method: 'DELETE',
         headers: {
-            'Content-Type': 'application/json'
-            //TODO 'Authorization': 'Bearer ' + token
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify(data)
     })
@@ -137,8 +139,8 @@ function updateConcert(){
     fetch('http://localhost:8081/admin/concerts', {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json'
-            //TODO 'Authorization': 'Bearer ' + token
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify(data)
     })

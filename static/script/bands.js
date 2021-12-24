@@ -1,9 +1,10 @@
 window.addEventListener('load', init);
+
+const cookies = document.cookie.split('=');
+const token = cookies[cookies.length - 1];
 let currentId;
 
 function init(){
-
-    //todo cookies, token
 
     getBands();
 
@@ -24,8 +25,8 @@ function addBand(){
     fetch('http://localhost:8081/admin/bands', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
-            //TODO 'Authorization': 'Bearer ' + token
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify(data)
     })
@@ -55,7 +56,7 @@ function addBand(){
 function getBands(){
     fetch('http://localhost:8081/admin/bands', {
         headers: {
-            //TODO 'Authorization': 'Bearer ' + token
+            'Authorization': 'Bearer ' + token
         }
     })
     .then(res => res.json())
@@ -92,8 +93,8 @@ function deleteBand(bandId){
     fetch('http://localhost:8081/admin/bands', {
         method: 'DELETE',
         headers: {
-            'Content-Type': 'application/json'
-            //TODO 'Authorization': 'Bearer ' + token
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify(data)
     })
@@ -130,8 +131,8 @@ function updateBand(){
     fetch('http://localhost:8081/admin/bands', {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json'
-            //TODO 'Authorization': 'Bearer ' + token
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify(data)
     })

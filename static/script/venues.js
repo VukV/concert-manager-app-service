@@ -1,9 +1,10 @@
 window.addEventListener('load', init);
+
+const cookies = document.cookie.split('=');
+const token = cookies[cookies.length - 1];
 let currentId;
 
 function init(){
-    
-    //todo cookies, token
 
     getVenues();
 
@@ -24,8 +25,8 @@ function addVenue(){
     fetch('http://localhost:8081/admin/venues', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
-            //TODO 'Authorization': 'Bearer ' + token
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify(data)
     })
@@ -55,7 +56,7 @@ function addVenue(){
 function getVenues(){
     fetch('http://localhost:8081/admin/venues', {
         headers: {
-            //TODO 'Authorization': 'Bearer ' + token
+            'Authorization': 'Bearer ' + token
         }
     })
     .then(res => res.json())
@@ -92,8 +93,8 @@ function deleteVenue(venueId){
     fetch('http://localhost:8081/admin/venues', {
         method: 'DELETE',
         headers: {
-            'Content-Type': 'application/json'
-            //TODO 'Authorization': 'Bearer ' + token
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify(data)
     })
@@ -130,8 +131,8 @@ function updateVenue(){
     fetch('http://localhost:8081/admin/venues', {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json'
-            //TODO 'Authorization': 'Bearer ' + token
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify(data)
     })

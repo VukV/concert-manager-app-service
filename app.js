@@ -58,35 +58,45 @@ app.get('/bands', authToken, (req, res) =>{
     if(req.user.privilege === 'ADMIN' || req.user.privilege === 'MANAGER'){
         res.sendFile('bands.html', {root: './static'});
     }
-    res.status(401).send('Not authorized');
+    else{
+        res.status(401).send('Not authorized');
+    }
 });
 
 app.get('/concerts', authToken, (req, res) =>{
     if(req.user.privilege === 'ADMIN' || req.user.privilege === 'MANAGER'){
         res.sendFile('concerts.html', {root: './static'});
     }
-    res.status(401).send('Not authorized');
+    else{
+        res.status(401).send('Not authorized');
+    }
 });
 
 app.get('/venues', authToken, (req, res) =>{
     if(req.user.privilege === 'ADMIN' || req.user.privilege === 'MANAGER'){
         res.sendFile('venues.html', {root: './static'});
     }
-    res.status(401).send('Not authorized');
+    else{
+        res.status(401).send('Not authorized');
+    }
 });
 
 app.get('/reservations', authToken, (req, res) =>{
     if(req.user.privilege === 'ADMIN' || req.user.privilege === 'MANAGER'){
         res.sendFile('reservations.html', {root: './static'});
     }
-    res.status(401).send('Not authorized');
+    else{
+        res.status(401).send('Not authorized');
+    }
 });
 
 app.get('/users', authToken, (req, res) =>{
     if(req.user.privilege === 'ADMIN'){
         res.sendFile('users.html', {root: './static'});
     }
-    res.status(401).send('Not authorized');
+    else{
+        res.status(401).send('Not authorized');
+    }
 });
 
 app.get('/registration-success', (req, res) =>{

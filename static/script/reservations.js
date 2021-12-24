@@ -1,8 +1,10 @@
 window.addEventListener('load', init);
+
+const cookies = document.cookie.split('=');
+const token = cookies[cookies.length - 1];
 let currentId;
 
 function init(){
-    //TODO cookies, token
 
     getReservations();
 
@@ -22,8 +24,8 @@ function addReservation(){
     fetch('http://localhost:8081/admin/reservations', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
-            //TODO 'Authorization': 'Bearer ' + token
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify(data)
     })
@@ -54,7 +56,7 @@ function addReservation(){
 function getReservations(){
     fetch('http://localhost:8081/admin/reservations', {
         headers: {
-            //TODO 'Authorization': 'Bearer ' + token
+            'Authorization': 'Bearer ' + token
         }
     })
     .then(res => res.json())
@@ -91,8 +93,8 @@ function deleteReservation(reservationId){
     fetch('http://localhost:8081/admin/reservations', {
         method: 'DELETE',
         headers: {
-            'Content-Type': 'application/json'
-            //TODO 'Authorization': 'Bearer ' + token
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify(data)
     })
@@ -130,8 +132,8 @@ function updateReservation(){
     fetch('http://localhost:8081/admin/reservations', {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json'
-            //TODO 'Authorization': 'Bearer ' + token
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify(data)
     })

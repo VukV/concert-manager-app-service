@@ -1,8 +1,10 @@
 window.addEventListener('load', init);
+
+const cookies = document.cookie.split('=');
+const token = cookies[cookies.length - 1];
 let currentId;
 
 function init(){
-    //TODO cookies, token
 
     getUsers();
 
@@ -23,8 +25,8 @@ function addUser(){
     fetch('http://localhost:8081/admin/users', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
-            //TODO 'Authorization': 'Bearer ' + token
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify(data)
     })
@@ -53,7 +55,7 @@ function addUser(){
 function getUsers(){
     fetch('http://localhost:8081/admin/users', {
         headers: {
-            //TODO 'Authorization': 'Bearer ' + token
+            'Authorization': 'Bearer ' + token
         }
     })
     .then(res => res.json())
@@ -88,8 +90,8 @@ function deleteUser(userId){
     fetch('http://localhost:8081/admin/users', {
         method: 'DELETE',
         headers: {
-            'Content-Type': 'application/json'
-            //TODO 'Authorization': 'Bearer ' + token
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify(data)
     })
@@ -126,8 +128,8 @@ function updateUser(){
     fetch('http://localhost:8081/admin/users', {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json'
-            //TODO 'Authorization': 'Bearer ' + token
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify(data)
     })
