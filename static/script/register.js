@@ -17,8 +17,13 @@ function init(){
         })
             .then(res => res.json())
                 .then(resElement => {
-                    document.cookie = `token=${resElement.token};SameSite=Lax`;
-                    window.location.href = 'registration_success.html';
+                    if(resElement.message){
+                        alert(resElement.message);
+                    } 
+                    else{
+                        document.cookie = `token=${resElement.token};SameSite=Lax`;
+                        window.location.href = 'registration_success.html';
+                    }
                 });
     });
 }
