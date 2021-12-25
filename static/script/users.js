@@ -123,7 +123,6 @@ function updateUser(){
         email: document.getElementById('email-popup').value,
         privilege: document.getElementById('role-popup').value
     }
-    currentId = null;
 
     fetch('http://localhost:8081/admin/users', {
         method: 'PUT',
@@ -133,18 +132,20 @@ function updateUser(){
         },
         body: JSON.stringify(data)
     })
-    .then(res => {
-        if(res.json().message){
-            alert(res.json().message);
-        }
-        else{
-            document.querySelector('#users-body').innerHTML = '';
-            getUsers();
+    .then(res => res.json())
+        .then(resElement => {
+            if(resElement.message){
+                alert(resElement.message);
+            }
+            else{
+                document.querySelector('#users-body').innerHTML = '';
+                getUsers();
 
-            closePopUp();
-            clearUpdate();
-        }
-    });
+                closePopUp();
+                clearUpdate();
+                currentId = null;
+            }
+        });
 }
 
 function clearUpdate(){

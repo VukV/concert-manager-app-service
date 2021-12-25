@@ -98,15 +98,16 @@ function deleteVenue(venueId){
         },
         body: JSON.stringify(data)
     })
-    .then(res => {
-        if(res.json().message){
-            alert(res.json().message);
-        }
-        else{
-            let trDelete = document.getElementById(`btn-del-${venueId}`).parentNode.parentNode;
-            trDelete.parentNode.removeChild(trDelete); 
-        }
-    });
+    .then(res => res.json())
+        .then(resElement => {
+            if(resElement.message){
+                alert(resElement.message);
+            }
+            else{
+                let trDelete = document.getElementById(`btn-del-${venueId}`).parentNode.parentNode;
+                trDelete.parentNode.removeChild(trDelete); 
+            }
+        });
 }
 
 function openPopUp(venueId){
@@ -126,7 +127,6 @@ function updateVenue(){
         address: document.getElementById('address-popup').value,
         website: document.getElementById('website-popup').value
     }
-    currentId = null;
 
     fetch('http://localhost:8081/admin/venues', {
         method: 'PUT',
@@ -136,18 +136,20 @@ function updateVenue(){
         },
         body: JSON.stringify(data)
     })
-    .then(res => {
-        if(res.json().message){
-            alert(res.json().message);
-        }
-        else{
-            document.querySelector('#venues-body').innerHTML = '';
-            getVenues();
+    .then(res => res.json())
+        .then(resElement => {
+            if(resElement.message){
+                alert(resElement.message);
+            }
+            else{
+                document.querySelector('#venues-body').innerHTML = '';
+                getVenues();
 
-            closePopUp();
-            clearUpdate();
-        }
-    });
+                closePopUp();
+                clearUpdate();
+                currentId = null;
+            }
+        });
 }
 
 function clearUpdate(){

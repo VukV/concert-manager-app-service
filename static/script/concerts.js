@@ -104,15 +104,16 @@ function deleteConcert(concertId){
         },
         body: JSON.stringify(data)
     })
-    .then(res => {
-        if(res.json().message){
-            alert(res.json().message);
-        }
-        else{
-            let trDelete = document.getElementById(`btn-del-${concertId}`).parentNode.parentNode;
-            trDelete.parentNode.removeChild(trDelete); 
-        }
-    });
+    .then(res => res.json())
+        .then(resElement => {
+            if(resElement.message){
+                alert(resElement.message);
+            }
+            else{
+                let trDelete = document.getElementById(`btn-del-${concertId}`).parentNode.parentNode;
+                trDelete.parentNode.removeChild(trDelete); 
+            }
+        });
 }
 
 function openPopUp(concertId){
@@ -134,7 +135,6 @@ function updateConcert(){
         date: document.getElementById('date-popup').value,
         time: document.getElementById('time-popup').value
     }
-    currentId = null;
 
     fetch('http://localhost:8081/admin/concerts', {
         method: 'PUT',
@@ -144,18 +144,20 @@ function updateConcert(){
         },
         body: JSON.stringify(data)
     })
-    .then(res => {
-        if(res.json().message){
-            alert(res.json().message);
-        }
-        else{
-            document.querySelector('#concerts-body').innerHTML = '';
-            getConcerts();
+    .then(res => res.json())
+        .then(resElement => {
+            if(resElement.message){
+                alert(resElement.message);
+            }
+            else{
+                document.querySelector('#concerts-body').innerHTML = '';
+                getConcerts();
 
-            closePopUp();
-            clearUpdate();
-        }
-    });
+                closePopUp();
+                clearUpdate();
+                currentId = null;
+            }
+        });
 }
 
 function clearUpdate(){

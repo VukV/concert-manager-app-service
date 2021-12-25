@@ -98,15 +98,16 @@ function deleteReservation(reservationId){
         },
         body: JSON.stringify(data)
     })
-    .then(res => {
-        if(res.json().message){
-            alert(res.json().message);
-        }
-        else{
-            let trDelete = document.getElementById(`btn-del-${reservationId}`).parentNode.parentNode;
-            trDelete.parentNode.removeChild(trDelete); 
-        }
-    });
+    .then(res => res.json())
+        .then(resElement => {
+            if(resElement.message){
+                alert(resElement.message);
+            }
+            else{
+                let trDelete = document.getElementById(`btn-del-${reservationId}`).parentNode.parentNode;
+                trDelete.parentNode.removeChild(trDelete); 
+            }
+        });
 }
 
 function openPopUp(reservationId){
@@ -127,7 +128,6 @@ function updateReservation(){
         totalPrice: document.getElementById('price-popup').value,
         validUntil: document.getElementById('date-popup').value
     }
-    currentId = null;
 
     fetch('http://localhost:8081/admin/reservations', {
         method: 'PUT',
@@ -137,18 +137,20 @@ function updateReservation(){
         },
         body: JSON.stringify(data)
     })
-    .then(res => {
-        if(res.json().message){
-            alert(res.json().message);
-        }
-        else{
-            document.querySelector('#reservations-body').innerHTML = '';
-            getReservations();
+    .then(res => res.json())
+        .then(resElement => {
+            if(resElement.message){
+                alert(resElement.message);
+            }
+            else{
+                document.querySelector('#reservations-body').innerHTML = '';
+                getReservations();
 
-            closePopUp();
-            clearUpdate();
-        }
-    });
+                closePopUp();
+                clearUpdate();
+                currentId = null;
+            }
+        });
 }
 
 function clearUpdate(){
