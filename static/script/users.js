@@ -118,7 +118,7 @@ function closePopUp(){
 function updateUser(){
     var data = {
         id: currentId,
-        name: document.getElementById('name-popup').value,
+        username: document.getElementById('name-popup').value,
         password: document.getElementById('password-popup').value,
         email: document.getElementById('email-popup').value,
         privilege: document.getElementById('role-popup').value
