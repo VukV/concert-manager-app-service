@@ -22,14 +22,15 @@ function addUser(){
         privilege: document.getElementById('user-role').value
     }
 
-    fetch('http://localhost:8081/admin/users', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
-        },
-        body: JSON.stringify(data)
-    })
+    if(validate(data)){
+        fetch('http://localhost:8081/admin/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify(data)
+        })
         .then(res => res.json())
             .then(resElement => {    
                 if(resElement.message){
@@ -45,11 +46,12 @@ function addUser(){
                         <td class="tdeb"> <button id="btn-edit-${resElement.id}" class="btn-edit" onclick="openPopUp(${resElement.id})"> Edit </button> </td>
                         <td> <button id="btn-del-${resElement.id}" class="btn-del" onclick="deleteUser(${resElement.id})"> Delete </button> </td>
                     </tr>`;
-
+    
                     document.querySelector('#users-body').innerHTML = document.querySelector('#users-body').innerHTML + newRow;
                     clearInput();
                 }
             });
+    }
 }
 
 function getUsers(){
@@ -152,4 +154,17 @@ function clearUpdate(){
     document.getElementById('name-popup').value = '';
     document.getElementById('password-popup').value = '';
     document.getElementById('email-popup').value = '';
+}
+
+function validate(data){
+    if(data.username.length < 3 || data.name.length > 12){
+        alert('Invalid username format');
+        return false;
+    }
+    if(data.password.length < 4 || data.password.length > 12){
+        alert('Invalid password format');
+        return false;
+    }
+
+    return true;
 }

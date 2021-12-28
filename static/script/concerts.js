@@ -23,37 +23,40 @@ function addConcert(){
         time: document.getElementById('concert-time').value
     }
 
-    fetch('http://localhost:8081/admin/concerts', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
-        },
-        body: JSON.stringify(data)
-    })
-    .then(res => res.json())
-        .then(resElement => {    
-            if(resElement.message){
-                alert(resElement.message);
-            }
-            else{
-                let newRow = 
-                `<tr>
-                    <td>${resElement.id}</td>
-                    <td>${resElement.bandId}</td>
-                    <td>${resElement.venueId}</td>
-                    <td>${resElement.date}</td>
-                    <td>${resElement.time}</td>
-                    <td>${resElement.ticketsNumber}</td>
-                    <td>${resElement.ticketPrice}</td>
-                    <td class="tdeb"> <button id="btn-edit-${resElement.id}" class="btn-edit" onclick="openPopUp(${resElement.id})"> Edit </button> </td>
-                    <td> <button id="btn-del-${resElement.id}" class="btn-del" onclick="deleteConcert(${resElement.id})"> Delete </button> </td>
-                </tr>`;
-
-                document.querySelector('#concerts-body').innerHTML = document.querySelector('#concerts-body').innerHTML + newRow;
-                clearInput();
-            }
-        });
+    if(validate(data)){
+        fetch('http://localhost:8081/admin/concerts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+            .then(resElement => {    
+                if(resElement.message){
+                    alert(resElement.message);
+                }
+                else{
+                    let newRow = 
+                    `<tr>
+                        <td>${resElement.id}</td>
+                        <td>${resElement.bandId}</td>
+                        <td>${resElement.venueId}</td>
+                        <td>${resElement.date}</td>
+                        <td>${resElement.time}</td>
+                        <td>${resElement.ticketsNumber}</td>
+                        <td>${resElement.ticketPrice}</td>
+                        <td class="tdeb"> <button id="btn-edit-${resElement.id}" class="btn-edit" onclick="openPopUp(${resElement.id})"> Edit </button> </td>
+                        <td> <button id="btn-del-${resElement.id}" class="btn-del" onclick="deleteConcert(${resElement.id})"> Delete </button> </td>
+                    </tr>`;
+    
+                    document.querySelector('#concerts-body').innerHTML = document.querySelector('#concerts-body').innerHTML + newRow;
+                    clearInput();
+                }
+            });
+    }
+   
 }
 
 function getConcerts(){
@@ -167,4 +170,29 @@ function clearUpdate(){
     document.getElementById('tickets-popup').value = '';
     document.getElementById('date-popup').value = '';
     document.getElementById('time-popup').value = '';
+}
+
+function validate(data){
+    if(data.bandId < 1){
+        alert('Invalid band ID');
+        return false;
+    }
+    if(data.venueId < 1){
+        alert('Invalid venue ID');
+        return false;
+    }
+    if(data.ticketPrice < 0){
+        alert('Invalid ticket price format');
+        return false;
+    }
+    if(!(Date.parse(data.date))){
+        alert('Invalid date format');
+        return false;
+    }
+    if(!(/^([0-9]{2})\:([0-9]{2})$/.test(data.time))){
+        alert('Invalid time format');
+        return false;
+    }
+
+    return true;
 }

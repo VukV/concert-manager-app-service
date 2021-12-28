@@ -21,14 +21,15 @@ function addReservation(){
         ticketsNumber: document.getElementById('tickets-count').value
     }
 
-    fetch('http://localhost:8081/admin/reservations', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
-        },
-        body: JSON.stringify(data)
-    })
+    if(validate(data)){
+        fetch('http://localhost:8081/admin/reservations', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify(data)
+        })
         .then(res => res.json())
             .then(resElement => {    
                 if(resElement.message){
@@ -46,11 +47,12 @@ function addReservation(){
                         <td class="tdeb"> <button id="btn-edit-${resElement.id}" class="btn-edit" onclick="openPopUp(${resElement.id})"> Edit </button> </td>
                         <td> <button id="btn-del-${resElement.id}" class="btn-del" onclick="deleteReservation(${resElement.id})"> Delete </button> </td>
                     </tr>`;
-
+    
                     document.querySelector('#reservations-body').innerHTML = document.querySelector('#reservations-body').innerHTML + newRow;
                     clearInput();
                 }
             });
+    }
 }
 
 function getReservations(){
@@ -159,4 +161,21 @@ function clearUpdate(){
     document.getElementById('tickets-popup').value = '';
     document.getElementById('price-popup').value = '';
     document.getElementById('date-popup').value = '';
+}
+
+function validate(data){
+    if(data.userId < 1){
+        alert('Invalid band ID');
+        return false;
+    }
+    if(data.concertId < 1){
+        alert('Invalid concert ID');
+        return false;
+    }
+    if(data.ticketsNumber < 1){
+        alert('Invalid tickets number format');
+        return false;
+    }
+
+    return true;
 }

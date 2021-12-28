@@ -22,14 +22,15 @@ function addBand(){
         genre: document.getElementById('band-genre').value
     }
 
-    fetch('http://localhost:8081/admin/bands', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
-        },
-        body: JSON.stringify(data)
-    })
+    if(validate(data)){
+        fetch('http://localhost:8081/admin/bands', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify(data)
+        })
         .then(res => res.json())
             .then(resElement => {    
                 if(resElement.message){
@@ -46,11 +47,12 @@ function addBand(){
                         <td class="tdeb"> <button id="btn-edit-${resElement.id}" class="btn-edit" onclick="openPopUp(${resElement.id})"> Edit </button> </td>
                         <td> <button id="btn-del-${resElement.id}" class="btn-del" onclick="deleteBand(${resElement.id})"> Delete </button> </td>
                     </tr>`;
-
+    
                     document.querySelector('#bands-body').innerHTML = document.querySelector('#bands-body').innerHTML + newRow;
                     clearInput();
                 }
             });
+    }
 }
 
 function getBands(){
@@ -157,4 +159,25 @@ function clearUpdate(){
     document.getElementById('country-popup').value = '';
     document.getElementById('year-popup').value = '';
     document.getElementById('genre-popup').value = '';
+}
+
+function validate(data){
+    if(data.name.length < 1 || data.name.length > 30){
+        alert('Invalid name format');
+        return false;
+    }
+    if(!(/^[a-zA-Z]{2,56}$/.test(data.country))){
+        alert('Invalid country format');
+        return false;
+    }
+    if(!(/^[a-zA-Z]{2,15}$/.test(data.genre))){
+        alert('Invalid genre format');
+        return false;
+    }
+    if(!(/^[0-9]{4}$/.test(data.year))){
+        alert('Invalid year format');
+        return false;
+    }
+
+    return true;
 }
