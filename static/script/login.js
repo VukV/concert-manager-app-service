@@ -31,7 +31,7 @@ function init(){
 }
 
 function validate(data){
-    if(data.username.length < 3 || data.name.length > 12){
+    if(data.username.length < 3 || data.username.length > 12){
         alert('Invalid username format');
         return false;
     }
