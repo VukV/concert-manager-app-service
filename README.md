@@ -3,6 +3,8 @@
 
 This is a part of NodeJS service-oriented project for Scripting Languages course at Faculty of Computing.
 
+The purpose of the project was to learn JavaScript and NodeJS, as well as multi-service communication.
+
 This service is responsible for sending static files.
 
 All services:
